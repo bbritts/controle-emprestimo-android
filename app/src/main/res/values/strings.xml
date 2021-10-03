@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Empréstimo de Equipamentos</string>
+    <string name="botao_gerenciar_equip">Gerenciar Equipamentos</string>
+    <string name="botao_gerenciar_emp">Gerenciar Empréstimos</string>
+    <string name="textview_divisoria_principal">OU</string>
+    <string name="title_activity_equipamentos">Gerenciar Equipamentos</string>
+    <string name="hint_nome_equip">Digite o Nome do Equipamento</string>
+    <string name="imageview_principal_descricao">Logo da Empresa X</string>
+    <string name="title_activity_gerenciar_emprestimo">Gerenciar Empréstimo</string>
+    <string name="hint_nome_pessoa">Digite o Nome da Pessoa</string>
+    <string name="hint_marca_equip">Digite a Marca do Equipamento</string>
+    <string name="hint_telefone">Digite o Telefone</string>
+    <string name="hint_data_emprestimo">Digite a Data</string>
+    <string name="textview_equip_disponiveis">Selecione um Equipamento Disponível</string>
+    <string name="textSwitchDevolvido">Devolvido</string>
+</resources>

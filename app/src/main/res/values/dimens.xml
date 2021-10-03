@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="largura_botao_principal">240dp</dimen>
+    <dimen name="altura_botao_principal">75dp</dimen>
+    <dimen name="largura_divisoria_principal">100dp</dimen>
+    <dimen name="altura_divisoria_principal">2dp</dimen>
+    <dimen name="altura_imageview_principal">240dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="padding_textview_lista">5dp</dimen>
+</resources>
