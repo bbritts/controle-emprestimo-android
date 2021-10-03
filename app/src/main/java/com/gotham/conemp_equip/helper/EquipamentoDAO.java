@@ -34,7 +34,7 @@ public class EquipamentoDAO implements IEquipamentoDAO {
             salva.insert(DbHelper.getTbEquipamentos(), null, valoresParaInserir);
             Log.i("DATA", "Equipamento salvo com sucesso");
         } catch(Exception e) {
-            Log.e("ERROR", "Erro ao salvar a mensagem");
+            Log.e("ERROR", "Erro ao salvar o equipamento mensagem" + e.getMessage());
             return false;
         }
         return true;
@@ -43,18 +43,16 @@ public class EquipamentoDAO implements IEquipamentoDAO {
     @Override
     public boolean atualizar(Equipamento equip) {
 
-        String[] argumentoWhereSQL = {equip.getId().toString()};
-
         ContentValues valoresParaInserir = new ContentValues();
         valoresParaInserir.put(DbHelper.getClEquipamentosNome(), equip.getNomeEquip());
         valoresParaInserir.put(DbHelper.getClEquipamentosMarca(), equip.getMarca());
 
-        salva.update(DbHelper.getTbEquipamentos(), valoresParaInserir, "id=?", argumentoWhereSQL);
-
         try {
+            String[] argumentoWhereSQL = {equip.getId().toString()};
+            salva.update(DbHelper.getTbEquipamentos(), valoresParaInserir, "id=?", argumentoWhereSQL);
             Log.i("DATA", "Equipamento atualizado com sucesso");
         } catch(Exception e) {
-            Log.e("ERROR", "Erro ao atualizar a mensagem");
+            Log.e("ERROR", "Erro ao atualizar o equipamento" + e.getMessage());
             return false;
         }
 

@@ -7,6 +7,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.gotham.conemp_equip.R;
 import com.gotham.conemp_equip.adapters.EmprestimosAdapter;
 import com.gotham.conemp_equip.helper.EmprestimoDAO;
+import com.gotham.conemp_equip.helper.RecyclerItemClickListener;
 import com.gotham.conemp_equip.model.Emprestimo;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -38,6 +40,39 @@ public class EmprestimosActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         recyclerView = findViewById(R.id.recyclerEmprestimo);
+
+        //Cria um evento de clique com o auxílio da helper.RecyclerItemClickListener
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(
+                getApplicationContext(),
+                recyclerView,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+
+                        //Recuperar o emprestimo selecionado
+                        Emprestimo empSelecionado = listaEmp.get(position);
+
+                        //Enviar para a próxima Activity
+                        Intent intent = new Intent(EmprestimosActivity.this,
+                                                        AdicionarEmprestimoActivity.class);
+
+                        intent.putExtra("emprestimo selecionado", empSelecionado);
+
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+
+                    }
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    }
+                }
+        ));
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

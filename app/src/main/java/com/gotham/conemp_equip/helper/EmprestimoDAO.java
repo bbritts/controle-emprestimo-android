@@ -39,7 +39,7 @@ public class EmprestimoDAO implements IEmprestimoDAO{
             salva.insert(DbHelper.getTbEmprestimos(), null, valoresParaInserir);
             Log.i("DATA", "Emprestimo registrado com sucesso");
         } catch(Exception e) {
-            Log.e("ERROR", "Erro ao salvar o empréstimo");
+            Log.e("ERROR", "Erro ao salvar o empréstimo " + e.getMessage());
             return false;
         }
         return true;
@@ -47,7 +47,24 @@ public class EmprestimoDAO implements IEmprestimoDAO{
 
     @Override
     public boolean atualizar(Emprestimo emp) {
-        return false;
+
+        ContentValues valoresParaInserir = new ContentValues();
+        valoresParaInserir.put(DbHelper.getClEmprestimosIdEquipFk(), emp.getEquipamento().getId());
+        valoresParaInserir.put(DbHelper.getClEmprestimosNomePessoa(), emp.getNomePessoa());
+        valoresParaInserir.put(DbHelper.getClEmprestimosTelefone(), emp.getTelefone());
+        valoresParaInserir.put(DbHelper.getClEmprestimosData(), emp.getData());
+        valoresParaInserir.put(DbHelper.getClEmprestimosDevolvido(), emp.isDevolvido());
+
+        try {
+            String[] argumentoWhereSQL = {emp.getId().toString()};
+            salva.update(DbHelper.getTbEmprestimos(), valoresParaInserir, "id=?", argumentoWhereSQL);
+            Log.i("DATA", "Empréstimo atualizado com sucesso");
+        } catch(Exception e) {
+            Log.e("ERROR", "Erro ao atualizar o empréstimo " + e.getMessage());
+            return false;
+        }
+
+        return true;
     }
 
     @Override

@@ -96,7 +96,7 @@ public class AdicionarEquipamentoActivity extends AppCompatActivity {
                                     "O equipamento foi salvo com sucesso", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(AdicionarEquipamentoActivity.this,
-                                    "Houve um erro ao tentar salvar", Toast.LENGTH_SHORT).show();
+                                    "Houve um erro ao tentar salvar equipamento", Toast.LENGTH_SHORT).show();
                         }
                     }
 

@@ -1,6 +1,5 @@
 package com.gotham.conemp_equip.activities;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -41,9 +40,6 @@ public class EquipamentosActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerEquip);
 
-        //Cria um DBHelper
-        DbHelper db = new DbHelper(getApplicationContext());
-
         //Cria um evento de clique com o auxílio da helper.RecyclerItemClickListener
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(
                 getApplicationContext(),
@@ -56,7 +52,9 @@ public class EquipamentosActivity extends AppCompatActivity {
                         Equipamento equipSelecionado = listaEquip.get(position);
 
                         //Enviar para a próxima Activity
-                        Intent intent = new Intent(EquipamentosActivity.this, AdicionarEquipamentoActivity.class);
+                        Intent intent = new Intent(EquipamentosActivity.this,
+                                                        AdicionarEquipamentoActivity.class);
+
                         intent.putExtra("equipamento selecionado", equipSelecionado);
 
                         startActivity(intent);

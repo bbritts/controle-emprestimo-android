@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,14 +28,15 @@ public class AdicionarEmprestimoActivity extends AppCompatActivity {
 
     // Atributos da GUI
 
-    TextInputEditText editNomePessoa;
-    EditText editTelefone;
-    EditText editData;
-    Spinner spinnerEquip;
-    Switch switchDevolvido;
+    private TextInputEditText editNomePessoa;
+    private EditText editTelefone;
+    private EditText editData;
+    private Spinner spinnerEquip;
+    private Switch switchDevolvido;
 
-    List<Equipamento> equipamentos;
-    Equipamento equip;
+    private List<Equipamento> equipamentos;
+    private Equipamento equip;
+    private Emprestimo emprestimoAtual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +50,43 @@ public class AdicionarEmprestimoActivity extends AppCompatActivity {
         spinnerEquip = findViewById(R.id.spinnerEquip);
         switchDevolvido = findViewById(R.id.switchDevolvido);
 
+
+        // Instancia um DAO
         EquipamentoDAO equipDao = new EquipamentoDAO(getApplicationContext());
 
         //Busca os equipamentos cadastrados TODO disponíveis
         equipamentos = equipDao.listarTodos();
 
-        //Spinner Adapter
+        // Cria um Adapter para o Spinner
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, equipamentos);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
 
         spinnerEquip.setAdapter(adapter);
+
+        // Recupera o objeto empréstimo do Intent
+        emprestimoAtual = (Emprestimo) getIntent().getSerializableExtra("emprestimo selecionado");
+
+        // Verifica se há objeto enviado pelo Intent para saber se é pra edição
+        if (emprestimoAtual != null) {
+
+            getSupportActionBar().setTitle("Atualizar Empréstimo");
+            switchDevolvido.setClickable(true);
+
+            editNomePessoa.setText(emprestimoAtual.getNomePessoa());
+            editTelefone.setText(emprestimoAtual.getTelefone());
+            editData.setText(emprestimoAtual.getData());
+
+            String equipEmprestado = emprestimoAtual.getEquipamento().getNomeEquip();
+            Integer posicaoEquipEmprestado = recuperaPosicao(spinnerEquip, equipEmprestado);
+
+            if (equipEmprestado != null) {
+                spinnerEquip.setSelection(posicaoEquipEmprestado);
+            }
+
+            switchDevolvido.setChecked(emprestimoAtual.isDevolvido());
+        }
+
+        //Listener para ficar escutando se algum item foi selecionado no Spinner
 
         AdapterView.OnItemSelectedListener escolha = new AdapterView.OnItemSelectedListener() {
             @Override
@@ -84,7 +113,7 @@ public class AdicionarEmprestimoActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.salvar :
+            case R.id.salvar:
 
                 // Cria classe DAO para manipular o BD
                 EmprestimoDAO dao = new EmprestimoDAO(getApplicationContext());
@@ -98,23 +127,61 @@ public class AdicionarEmprestimoActivity extends AppCompatActivity {
                     // Cria uma classe do modelo
                     Emprestimo emp = new Emprestimo();
 
-                    // Popula os atributos com os valores das caixas de texto
-                    emp.setNomePessoa(nomePessoa);
-                    emp.setTelefone(telefone);
-                    emp.setData(data);
-                    emp.setEquipamento(equip);
-                    emp.setDevolvido(switchDevolvido.isChecked());
+                    if (emprestimoAtual != null) { //Método para editar
 
-                    dao.inserir(emp);
+                        emp.setId(emprestimoAtual.getId());
+                        emp.setNomePessoa(nomePessoa);
+                        emp.setTelefone(telefone);
+                        emp.setData(data);
+                        emp.setEquipamento(equip);
+                        emp.setDevolvido(switchDevolvido.isChecked());
 
-                    //Finaliza a atividade
-                    finish();
+                        if(dao.atualizar(emp)) {
+                            //Finaliza a atividade
+                            finish();
 
-                    Toast.makeText(AdicionarEmprestimoActivity.this, "Item Salvo", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdicionarEmprestimoActivity.this,
+                                    "O empréstimo foi atualizado com sucesso", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(AdicionarEmprestimoActivity.this,
+                                    "Houve um erro ao tentar atualizar empréstimo", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } else { //Método para inserir
+
+                        // Popula os atributos com os valores das caixas de texto
+                        emp.setNomePessoa(nomePessoa);
+                        emp.setTelefone(telefone);
+                        emp.setData(data);
+                        emp.setEquipamento(equip);
+                        emp.setDevolvido(switchDevolvido.isChecked());
+
+                        if(dao.inserir(emp)) {
+                            //Finaliza a atividade
+                            finish();
+
+                            Toast.makeText(AdicionarEmprestimoActivity.this,
+                                    "O empréstimo foi salvo com sucesso", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(AdicionarEmprestimoActivity.this,
+                                    "Houve um erro ao tentar salvar empréstimo", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 }
+
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private Integer recuperaPosicao(Spinner spinner, String valor) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(valor)) {
+                return i;
+            }
+        }
+
+        return 0;
     }
 }
