@@ -73,6 +73,34 @@ public class EquipamentoDAO implements IEquipamentoDAO {
 
         Cursor cursor = recupera.rawQuery(consulta, null);
 
+        preencheListaEquip(lista, cursor);
+
+        return lista;
+    }
+
+    public List<Equipamento> listarDisponiveis() {
+
+        List<Equipamento> lista = new ArrayList<>();
+
+        String consulta = String.format("SELECT * FROM %s " +
+                                        "WHERE %s NOT IN " +
+                                            "(SELECT %s FROM %s " +
+                                             "WHERE %s = 0)",
+                                        DbHelper.getTbEquipamentos(),
+                                        DbHelper.getClEquipamentosId(),
+                                        DbHelper.getClEmprestimosIdEquipFk(),
+                                        DbHelper.getTbEmprestimos(),
+                                        DbHelper.getClEmprestimosDevolvido());
+
+
+        Cursor cursor = recupera.rawQuery(consulta, null);
+
+        preencheListaEquip(lista, cursor);
+
+        return lista;
+    }
+
+    private void preencheListaEquip(List<Equipamento> lista, Cursor cursor) {
         while(cursor.moveToNext()) {
 
             Equipamento equip = new Equipamento();
@@ -87,28 +115,5 @@ public class EquipamentoDAO implements IEquipamentoDAO {
 
             lista.add(equip);
         }
-
-        return lista;
-    }
-
-    public List<Equipamento> listarDisponiveis() {
-
-        List<Equipamento> lista = new ArrayList<>();
-
-        String consulta = String.format("SELECT * FROM %s a" +
-                                        "LEFT JOIN %s b ON a.%s = b.%s" +
-                                        "WHERE %s = 1 OR" +
-                                        "%s IS NULL",
-                                        DbHelper.getTbEquipamentos(),
-                                        DbHelper.getTbEmprestimos(),
-                                        DbHelper.getClEquipamentosId(),
-                                        DbHelper.getClEmprestimosIdEquipFk(),
-                                        DbHelper.getClEmprestimosDevolvido());
-
-        Cursor cursor = recupera.rawQuery(consulta, null);
-
-        //TODO
-
-        return lista;
     }
 }

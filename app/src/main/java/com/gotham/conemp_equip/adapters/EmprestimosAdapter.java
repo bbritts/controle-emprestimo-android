@@ -37,10 +37,16 @@ public class EmprestimosAdapter extends RecyclerView.Adapter<EmprestimosAdapter.
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         Emprestimo emp = lista.get(position);
+
+        // Converte o valor de devolvido para sim ou não, ao invés de true ou false
+        String devolvido = emp.isDevolvido() ? "Sim" : "Não";
+
+        //Define o modo de apresentação no RecyclerView
         holder.emprestimo.setText(emp.getId() + ": " + "Cliente: " + emp.getNomePessoa()
                                     + "\n    Telefone: " + emp.getTelefone()
                                     + "\n    Data: " + emp.getData()
-                                    + "\n    Equipamento: " + emp.getEquipamento().getNomeEquip());
+                                    + "\n    Equipamento: " + emp.getEquipamento().getNomeEquip()
+                                    + "\n    Devolvido: " + devolvido);
     }
 
     @Override

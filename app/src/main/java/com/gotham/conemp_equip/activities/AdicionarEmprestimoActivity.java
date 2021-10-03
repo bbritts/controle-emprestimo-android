@@ -50,12 +50,11 @@ public class AdicionarEmprestimoActivity extends AppCompatActivity {
         spinnerEquip = findViewById(R.id.spinnerEquip);
         switchDevolvido = findViewById(R.id.switchDevolvido);
 
-
         // Instancia um DAO
         EquipamentoDAO equipDao = new EquipamentoDAO(getApplicationContext());
 
-        //Busca os equipamentos cadastrados TODO disponíveis
-        equipamentos = equipDao.listarTodos();
+        //Busca os equipamentos cadastrados que estão disponíveis
+        equipamentos = equipDao.listarDisponiveis();
 
         // Cria um Adapter para o Spinner
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, equipamentos);
@@ -76,9 +75,16 @@ public class AdicionarEmprestimoActivity extends AppCompatActivity {
             editTelefone.setText(emprestimoAtual.getTelefone());
             editData.setText(emprestimoAtual.getData());
 
+            // Resolve o problema do equipamento emprestado não aparecer no spinner por estar indisponível
+            if (!emprestimoAtual.isDevolvido()) {
+                adapter.insert(emprestimoAtual.getEquipamento(), 0);
+            }
+
+            // Recupera o nome do equipamento emprestado e descobre sua posição no Spinner
             String equipEmprestado = emprestimoAtual.getEquipamento().getNomeEquip();
             Integer posicaoEquipEmprestado = recuperaPosicao(spinnerEquip, equipEmprestado);
 
+            // Seleciona o equipamento que veio do banco de dados
             if (equipEmprestado != null) {
                 spinnerEquip.setSelection(posicaoEquipEmprestado);
             }
