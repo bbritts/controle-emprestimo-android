@@ -12,12 +12,12 @@
         <activity android:name=".activities.AdicionarEmprestimoActivity"></activity>
         <activity
             android:name=".activities.EmprestimosActivity"
-            android:label="@string/title_activity_gerenciar_emprestimo"
+            android:label="@string/titulo_activity_gerenciar_emp"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.AdicionarEquipamentoActivity" />
         <activity
             android:name=".activities.EquipamentosActivity"
-            android:label="@string/title_activity_equipamentos"
+            android:label="@string/titulo_activity_gerenciar_equip"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>

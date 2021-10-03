@@ -33,7 +33,7 @@ public class EquipamentoDAO implements IEquipamentoDAO {
         try {
             salva.insert(DbHelper.getTbEquipamentos(), null, valoresParaInserir);
             Log.i("DATA", "Equipamento salvo com sucesso");
-        } catch(Exception e) {
+        } catch (Exception e) {
             Log.e("ERROR", "Erro ao salvar o equipamento mensagem" + e.getMessage());
             return false;
         }
@@ -51,7 +51,7 @@ public class EquipamentoDAO implements IEquipamentoDAO {
             String[] argumentoWhereSQL = {equip.getId().toString()};
             salva.update(DbHelper.getTbEquipamentos(), valoresParaInserir, "id=?", argumentoWhereSQL);
             Log.i("DATA", "Equipamento atualizado com sucesso");
-        } catch(Exception e) {
+        } catch (Exception e) {
             Log.e("ERROR", "Erro ao atualizar o equipamento" + e.getMessage());
             return false;
         }
@@ -61,7 +61,26 @@ public class EquipamentoDAO implements IEquipamentoDAO {
 
     @Override
     public boolean apagar(Equipamento equip) {
-        return false;
+
+        List<Equipamento> equipEmprestados = listarEmprestados();
+
+        for (Equipamento item: equipEmprestados) {
+
+            if (equip.getId() == item.getId()) {
+                return false;
+            }
+        }
+
+        try {
+            String[] argumentoWhereSQL = {equip.getId().toString()};
+            salva.delete(DbHelper.getTbEquipamentos(), "id = ?", argumentoWhereSQL);
+            Log.i("DATA", "Equipamento apagado com sucesso");
+        } catch (Exception e) {
+            Log.e("ERROR", "Erro ao apagar o equipamento" + e.getMessage());
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -83,14 +102,14 @@ public class EquipamentoDAO implements IEquipamentoDAO {
         List<Equipamento> lista = new ArrayList<>();
 
         String consulta = String.format("SELECT * FROM %s " +
-                                        "WHERE %s NOT IN " +
-                                            "(SELECT %s FROM %s " +
-                                             "WHERE %s = 0)",
-                                        DbHelper.getTbEquipamentos(),
-                                        DbHelper.getClEquipamentosId(),
-                                        DbHelper.getClEmprestimosIdEquipFk(),
-                                        DbHelper.getTbEmprestimos(),
-                                        DbHelper.getClEmprestimosDevolvido());
+                        "WHERE %s NOT IN " +
+                        "(SELECT %s FROM %s " +
+                        "WHERE %s = 0)",
+                DbHelper.getTbEquipamentos(),
+                DbHelper.getClEquipamentosId(),
+                DbHelper.getClEmprestimosIdEquipFk(),
+                DbHelper.getTbEmprestimos(),
+                DbHelper.getClEmprestimosDevolvido());
 
 
         Cursor cursor = recupera.rawQuery(consulta, null);
@@ -100,8 +119,29 @@ public class EquipamentoDAO implements IEquipamentoDAO {
         return lista;
     }
 
+    private List<Equipamento> listarEmprestados() {
+
+        List<Equipamento> lista = new ArrayList<>();
+
+        String consulta = String.format("SELECT * FROM %s " +
+                        "WHERE %s IN " +
+                        "(SELECT %s FROM %s " +
+                        "WHERE %s = 0)",
+                        DbHelper.getTbEquipamentos(),
+                        DbHelper.getClEquipamentosId(),
+                        DbHelper.getClEmprestimosIdEquipFk(),
+                        DbHelper.getTbEmprestimos(),
+                        DbHelper.getClEmprestimosDevolvido());
+
+        Cursor cursor = recupera.rawQuery(consulta, null);
+
+        preencheListaEquip(lista, cursor);
+
+        return lista;
+    }
+
     private void preencheListaEquip(List<Equipamento> lista, Cursor cursor) {
-        while(cursor.moveToNext()) {
+        while (cursor.moveToNext()) {
 
             Equipamento equip = new Equipamento();
 

@@ -25,17 +25,19 @@ public class AdicionarEquipamentoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_equipamento);
-        getSupportActionBar().setTitle("Adicionar Equipamento");
+        getSupportActionBar().setTitle(R.string.titulo_activity_adicionar_equip);
 
         editNome = findViewById(R.id.textInputNomeEquip);
         editMarca = findViewById(R.id.textInputMarcaEquip);
 
-        equipAtual = (Equipamento) getIntent().getSerializableExtra("equipamento selecionado");
+        equipAtual = (Equipamento) getIntent().getSerializableExtra(
+                String.valueOf(R.string.intent_nome_equip_selecionado)
+        );
 
         //Verifica se há objeto no intent, caso afirmativo configura tela de edição
         if(equipAtual != null) {
 
-            getSupportActionBar().setTitle("Atualizar Equipamento");
+            getSupportActionBar().setTitle(R.string.titulo_activity_atualizar_equip);
 
             editNome.setText(equipAtual.getNomeEquip());
             editMarca.setText(equipAtual.getMarca());
@@ -76,10 +78,10 @@ public class AdicionarEquipamentoActivity extends AppCompatActivity {
                             finish();
 
                             Toast.makeText(AdicionarEquipamentoActivity.this,
-                                    "O equipamento foi atualizado com sucesso", Toast.LENGTH_SHORT).show();
+                                    R.string.toast_sucesso_atualizacao_equip, Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(AdicionarEquipamentoActivity.this,
-                                    "Houve um erro ao tentar atualizar", Toast.LENGTH_SHORT).show();
+                                    R.string.toast_erro_atualizacao_equip, Toast.LENGTH_SHORT).show();
                         }
 
                     } else { // Método para inserir
@@ -93,20 +95,12 @@ public class AdicionarEquipamentoActivity extends AppCompatActivity {
                             finish();
 
                             Toast.makeText(AdicionarEquipamentoActivity.this,
-                                    "O equipamento foi salvo com sucesso", Toast.LENGTH_SHORT).show();
+                                    R.string.toast_sucesso_insercao_equip, Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(AdicionarEquipamentoActivity.this,
-                                    "Houve um erro ao tentar salvar equipamento", Toast.LENGTH_SHORT).show();
+                                    R.string.toast_erro_insercao_equip, Toast.LENGTH_SHORT).show();
                         }
                     }
-
-
-
-
-
-
-
-
                 }
                 break;
         }

@@ -42,7 +42,7 @@ public class AdicionarEmprestimoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_emprestimo);
-        getSupportActionBar().setTitle("Adicionar Empréstimo");
+        getSupportActionBar().setTitle(R.string.titulo_activity_adicionar_emp);
 
         editNomePessoa = findViewById(R.id.textInputNomePessoa);
         editTelefone = findViewById(R.id.textInputTelefone);
@@ -63,12 +63,14 @@ public class AdicionarEmprestimoActivity extends AppCompatActivity {
         spinnerEquip.setAdapter(adapter);
 
         // Recupera o objeto empréstimo do Intent
-        emprestimoAtual = (Emprestimo) getIntent().getSerializableExtra("emprestimo selecionado");
+        emprestimoAtual = (Emprestimo) getIntent().getSerializableExtra(
+                String.valueOf(R.string.intent_nome_emp_selecionado)
+        );
 
         // Verifica se há objeto enviado pelo Intent para saber se é pra edição
         if (emprestimoAtual != null) {
 
-            getSupportActionBar().setTitle("Atualizar Empréstimo");
+            getSupportActionBar().setTitle(R.string.titulo_activity_atualizar_emp);
             switchDevolvido.setClickable(true);
 
             editNomePessoa.setText(emprestimoAtual.getNomePessoa());
@@ -147,10 +149,10 @@ public class AdicionarEmprestimoActivity extends AppCompatActivity {
                             finish();
 
                             Toast.makeText(AdicionarEmprestimoActivity.this,
-                                    "O empréstimo foi atualizado com sucesso", Toast.LENGTH_SHORT).show();
+                                    R.string.toast_sucesso_atualizacao_emp, Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(AdicionarEmprestimoActivity.this,
-                                    "Houve um erro ao tentar atualizar empréstimo", Toast.LENGTH_SHORT).show();
+                                    R.string.toast_erro_atualizacao_emp, Toast.LENGTH_SHORT).show();
                         }
 
                     } else { //Método para inserir
@@ -163,14 +165,15 @@ public class AdicionarEmprestimoActivity extends AppCompatActivity {
                         emp.setDevolvido(switchDevolvido.isChecked());
 
                         if(dao.inserir(emp)) {
+
                             //Finaliza a atividade
                             finish();
 
                             Toast.makeText(AdicionarEmprestimoActivity.this,
-                                    "O empréstimo foi salvo com sucesso", Toast.LENGTH_SHORT).show();
+                                    R.string.toast_sucesso_insercao_emp, Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(AdicionarEmprestimoActivity.this,
-                                    "Houve um erro ao tentar salvar empréstimo", Toast.LENGTH_SHORT).show();
+                                    R.string.toast_erro_insercao_emp, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }

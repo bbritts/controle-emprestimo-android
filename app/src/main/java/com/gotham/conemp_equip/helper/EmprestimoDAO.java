@@ -69,7 +69,16 @@ public class EmprestimoDAO implements IEmprestimoDAO{
 
     @Override
     public boolean apagar(Emprestimo emp) {
-        return false;
+        try {
+            String[] argumentoWhereSQL = {emp.getId().toString()};
+            salva.delete(DbHelper.getTbEquipamentos(), "id = ?", argumentoWhereSQL);
+            Log.i("DATA", "Equipamento apagado com sucesso");
+        } catch (Exception e) {
+            Log.e("ERROR", "Erro ao apagar o equipamento" + e.getMessage());
+            return false;
+        }
+
+        return true;
     }
 
     @Override

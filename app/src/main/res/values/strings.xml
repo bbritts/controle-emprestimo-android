@@ -3,14 +3,55 @@
     <string name="botao_gerenciar_equip">Gerenciar Equipamentos</string>
     <string name="botao_gerenciar_emp">Gerenciar Empréstimos</string>
     <string name="textview_divisoria_principal">OU</string>
-    <string name="title_activity_equipamentos">Gerenciar Equipamentos</string>
-    <string name="hint_nome_equip">Digite o Nome do Equipamento</string>
     <string name="imageview_principal_descricao">Logo da Empresa X</string>
-    <string name="title_activity_gerenciar_emprestimo">Gerenciar Empréstimo</string>
+
+    <string name="titulo_activity_gerenciar_equip">Gerenciar Equipamentos</string>
+    <string name="titulo_activity_gerenciar_emp">Gerenciar Empréstimo</string>
+    <string name="titulo_activity_adicionar_equip">Adicionar Equipamento</string>
+    <string name="titulo_activity_atualizar_equip">Atualizar Equipamento</string>
+    <string name="titulo_activity_adicionar_emp">Adicionar Empréstimo</string>
+    <string name="titulo_activity_atualizar_emp">Atualizar Empréstimo</string>
+
+    <string name="hint_nome_equip">Digite o Nome do Equipamento</string>
     <string name="hint_nome_pessoa">Digite o Nome da Pessoa</string>
     <string name="hint_marca_equip">Digite a Marca do Equipamento</string>
     <string name="hint_telefone">Digite o Telefone</string>
     <string name="hint_data_emprestimo">Digite a Data</string>
+
     <string name="textview_equip_disponiveis">Selecione um Equipamento Disponível</string>
     <string name="textSwitchDevolvido">Devolvido</string>
+
+    <string name="holder_rv_emprestimo">%1$d: Cliente: %2$s\n
+                                              Telefone: %3$s\n
+                                              Data: %4$s\n
+                                              Equipamento: %5$s\n
+                                              Devolvido: %6$s
+    </string>
+
+    <string name="dialog_titulo_exclusao">Confirmação de exclusão</string>
+    <string name="dialog_mensagem_exclusao_equip">Você tem certeza que deseja excluir o equipamento?</string>
+    <string name="dialog_mensagem_exclusao_emp">Você tem certeza que deseja excluir o empréstimo?</string>
+    <string name="dialog_botao_positivo">Sim</string>
+    <string name="dialog_botao_negativo">Não</string>
+    <string name="dialog_botao_neutro">Ok</string>
+    <string name="dialog_titulo_erro_exclusao_equip">Erro ao apagar equipamento</string>
+    <string name="dialog_mensagem_erro_exclusao_equip">Você não pode excluir um equipamento que está emprestado!</string>
+
+    <string name="toast_sucesso_exclusao_equip">O equipamento foi apagado com sucesso</string>
+    <string name="toast_erro_exclusao_equip">Houve um erro ao tentar apagar o equipamento</string>
+    <string name="toast_sucesso_atualizacao_equip">O equipamento foi atualizado com sucesso</string>
+    <string name="toast_erro_atualizacao_equip">Houve um erro ao tentar atualizar o equipamento</string>
+    <string name="toast_sucesso_insercao_equip">O equipamento foi salvo com sucesso</string>
+    <string name="toast_erro_insercao_equip">Houve um erro ao tentar salvar o equipamento</string>
+    <string name="toast_sucesso_exclusao_emp">O empréstimo foi apagado com sucesso</string>
+    <string name="toast_erro_exclusao_emp">Houve um erro ao tentar apagar o empréstimo</string>
+    <string name="toast_sucesso_atualizacao_emp">O empréstimo foi atualizado com sucesso</string>
+    <string name="toast_erro_atualizacao_emp">Houve um erro ao tentar atualizar o empréstimo</string>
+    <string name="toast_sucesso_insercao_emp">O empréstimo foi salvo com sucesso</string>
+    <string name="toast_erro_insercao_emp">Houve um erro ao tentar salvar o empréstimo</string>
+
+    <string name="intent_nome_equip_selecionado">Equipamento Selecionado</string>
+    <string name="intent_nome_emp_selecionado">Emprestimo Selecionado</string>
+
+
 </resources>

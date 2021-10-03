@@ -1,5 +1,6 @@
 package com.gotham.conemp_equip.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,21 +18,25 @@ public class EmprestimosAdapter extends RecyclerView.Adapter<EmprestimosAdapter.
 
     // Atributos
     private List<Emprestimo> lista;
+    private Context context;
 
     // Construtor
-    public EmprestimosAdapter(List<Emprestimo> lista) {
+    public EmprestimosAdapter(List<Emprestimo> lista, Context context) {
 
         this.lista = lista;
+        this.context = context;
     }
 
     // Métodos implementados da RecyclerView.Adapter
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemCadastrado = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_adapter, parent, false);
+        View itemCadastrado = LayoutInflater.from(parent.getContext()).inflate(
+                R.layout.lista_adapter, parent, false);
 
         return new MyViewHolder(itemCadastrado);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
@@ -42,11 +47,16 @@ public class EmprestimosAdapter extends RecyclerView.Adapter<EmprestimosAdapter.
         String devolvido = emp.isDevolvido() ? "Sim" : "Não";
 
         //Define o modo de apresentação no RecyclerView
-        holder.emprestimo.setText(emp.getId() + ": " + "Cliente: " + emp.getNomePessoa()
-                                    + "\n    Telefone: " + emp.getTelefone()
-                                    + "\n    Data: " + emp.getData()
-                                    + "\n    Equipamento: " + emp.getEquipamento().getNomeEquip()
-                                    + "\n    Devolvido: " + devolvido);
+
+        String string = context.getString(R.string.holder_rv_emprestimo,
+                emp.getId(),
+                emp.getNomePessoa(),
+                emp.getTelefone(),
+                emp.getData(),
+                emp.getEquipamento().getNomeEquip(),
+                devolvido);
+
+        holder.emprestimo.setText(string);
     }
 
     @Override

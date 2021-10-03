@@ -7,6 +7,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.gotham.conemp_equip.R;
+
 public class DbHelper extends SQLiteOpenHelper {
 
     private static final String NOME_BD = "EmpresaX";
@@ -36,7 +38,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onConfigure(SQLiteDatabase db) {
         super.onConfigure(db);
-        db.setForeignKeyConstraintsEnabled(true);
+        db.setForeignKeyConstraintsEnabled(false);
     }
 
     @Override
