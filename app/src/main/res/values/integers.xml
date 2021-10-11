@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="max_length_edittext_nome_pessoa">64</integer>
+    <integer name="max_length_edittext_nome_equipamento">128</integer>
+    <integer name="max_length_edittext_marca_equipamento">64</integer>
+    <integer name="max_length_edittext_telefone">15</integer>
+    <integer name="max_length_edittext_data">10</integer>
+</resources>

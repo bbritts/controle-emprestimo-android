@@ -1,4 +1,4 @@
-package com.gotham.conemp_equip.helper;
+package com.gotham.conemp_equip.util;
 
 import android.content.Context;
 import android.view.GestureDetector;

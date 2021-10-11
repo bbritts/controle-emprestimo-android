@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,10 +16,11 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.gotham.conemp_equip.R;
-import com.gotham.conemp_equip.helper.EmprestimoDAO;
-import com.gotham.conemp_equip.helper.EquipamentoDAO;
+import com.gotham.conemp_equip.persistence.EmprestimoDAO;
+import com.gotham.conemp_equip.persistence.EquipamentoDAO;
 import com.gotham.conemp_equip.model.Emprestimo;
 import com.gotham.conemp_equip.model.Equipamento;
+import com.gotham.conemp_equip.util.MaskEditUtil;
 
 import java.util.List;
 
@@ -45,8 +45,15 @@ public class AdicionarEmprestimoActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.titulo_activity_adicionar_emp);
 
         editNomePessoa = findViewById(R.id.textInputNomePessoa);
+
+        // Atribui o id o editText do frontend e adiciona máscara
         editTelefone = findViewById(R.id.textInputTelefone);
+        editTelefone.addTextChangedListener(MaskEditUtil.mask(editTelefone, MaskEditUtil.FORMAT_FONE));
+
         editData = findViewById(R.id.textInputData);
+        editData.addTextChangedListener(MaskEditUtil.mask(editData, MaskEditUtil.FORMAT_DATE));
+
+
         spinnerEquip = findViewById(R.id.spinnerEquip);
         switchDevolvido = findViewById(R.id.switchDevolvido);
 

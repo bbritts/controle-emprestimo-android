@@ -53,5 +53,7 @@
     <string name="intent_nome_equip_selecionado">Equipamento Selecionado</string>
     <string name="intent_nome_emp_selecionado">Emprestimo Selecionado</string>
 
+    <string name="edittext_digitos_nome">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\'\u0020</string>
+
 
 </resources>

@@ -7,8 +7,8 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.gotham.conemp_equip.R;
 import com.gotham.conemp_equip.adapters.EquipamentosAdapter;
-import com.gotham.conemp_equip.helper.EquipamentoDAO;
-import com.gotham.conemp_equip.helper.RecyclerItemClickListener;
+import com.gotham.conemp_equip.persistence.EquipamentoDAO;
+import com.gotham.conemp_equip.util.RecyclerItemClickListener;
 import com.gotham.conemp_equip.model.Equipamento;
 
 import androidx.appcompat.app.AlertDialog;

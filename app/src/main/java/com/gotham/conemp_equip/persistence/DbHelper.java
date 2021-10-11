@@ -1,4 +1,4 @@
-package com.gotham.conemp_equip.helper;
+package com.gotham.conemp_equip.persistence;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -6,8 +6,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-
-import com.gotham.conemp_equip.R;
 
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -38,7 +36,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onConfigure(SQLiteDatabase db) {
         super.onConfigure(db);
-        db.setForeignKeyConstraintsEnabled(false);
+        db.setForeignKeyConstraintsEnabled(true);
     }
 
     @Override

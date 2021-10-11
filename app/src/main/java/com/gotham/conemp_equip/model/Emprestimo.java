@@ -31,15 +31,6 @@ public class Emprestimo implements Serializable {
         setEquipamento(equipamento);
     }
 
-    public Emprestimo(Integer id, String nomePessoa, String telefone, String data, Equipamento equipamento) {
-        setId(id);
-        setNomePessoa(nomePessoa);
-        setTelefone(telefone);
-        setData(data);
-        setDevolvido(true);
-        setEquipamento(equipamento);
-    }
-
     //Métodos getter e setter
 
     public Integer getId() {

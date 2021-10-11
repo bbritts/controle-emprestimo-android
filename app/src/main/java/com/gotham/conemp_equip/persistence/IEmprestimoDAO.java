@@ -1,4 +1,4 @@
-package com.gotham.conemp_equip.helper;
+package com.gotham.conemp_equip.persistence;
 
 import com.gotham.conemp_equip.model.Emprestimo;
 

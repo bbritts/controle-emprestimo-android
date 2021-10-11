@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.gotham.conemp_equip.R;
-import com.gotham.conemp_equip.helper.EquipamentoDAO;
+import com.gotham.conemp_equip.persistence.EquipamentoDAO;
 import com.gotham.conemp_equip.model.Equipamento;
 
 public class AdicionarEquipamentoActivity extends AppCompatActivity {

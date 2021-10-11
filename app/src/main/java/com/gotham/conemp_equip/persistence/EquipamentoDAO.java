@@ -1,4 +1,4 @@
-package com.gotham.conemp_equip.helper;
+package com.gotham.conemp_equip.persistence;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -76,7 +76,7 @@ public class EquipamentoDAO implements IEquipamentoDAO {
             salva.delete(DbHelper.getTbEquipamentos(), "id = ?", argumentoWhereSQL);
             Log.i("DATA", "Equipamento apagado com sucesso");
         } catch (Exception e) {
-            Log.e("ERROR", "Erro ao apagar o equipamento" + e.getMessage());
+            Log.e("ERROR", "Erro ao apagar o equipamento " + e.getMessage());
             return false;
         }
 

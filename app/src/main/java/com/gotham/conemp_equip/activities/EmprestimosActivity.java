@@ -7,8 +7,8 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.gotham.conemp_equip.R;
 import com.gotham.conemp_equip.adapters.EmprestimosAdapter;
-import com.gotham.conemp_equip.helper.EmprestimoDAO;
-import com.gotham.conemp_equip.helper.RecyclerItemClickListener;
+import com.gotham.conemp_equip.persistence.EmprestimoDAO;
+import com.gotham.conemp_equip.util.RecyclerItemClickListener;
 import com.gotham.conemp_equip.model.Emprestimo;
 
 import androidx.appcompat.app.AlertDialog;
@@ -81,6 +81,7 @@ public class EmprestimosActivity extends AppCompatActivity {
                                 EmprestimoDAO dao = new EmprestimoDAO(getApplicationContext());
 
                                 if(dao.apagar(empSelecionado)) {
+
                                     carregaEmprestimos();
 
                                     Toast.makeText(EmprestimosActivity.this,

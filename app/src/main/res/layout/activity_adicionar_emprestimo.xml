@@ -21,9 +21,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputNomePessoa"
+            android:digits="@string/edittext_digitos_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_nome_pessoa" />
+            android:hint="@string/hint_nome_pessoa"
+            android:maxLength="@integer/max_length_edittext_nome_pessoa" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <EditText
@@ -38,6 +40,7 @@
         android:ems="10"
         android:hint="@string/hint_telefone"
         android:inputType="phone"
+        android:maxLength="@integer/max_length_edittext_telefone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +58,7 @@
         android:ems="10"
         android:hint="@string/hint_data_emprestimo"
         android:inputType="date"
+        android:maxLength="@integer/max_length_edittext_data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +105,6 @@
         android:layout_marginRight="16dp"
         android:checked="false"
         android:clickable="false"
-        android:editable="false"
         android:text="@string/textSwitchDevolvido"
         android:textColor="@android:color/black"
         android:textSize="18sp"

@@ -1,4 +1,4 @@
-package com.gotham.conemp_equip.helper;
+package com.gotham.conemp_equip.persistence;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -70,8 +70,19 @@ public class EmprestimoDAO implements IEmprestimoDAO{
     @Override
     public boolean apagar(Emprestimo emp) {
         try {
+
+            Integer teste = null;
+            ContentValues valoresParaInserir = new ContentValues();
+            valoresParaInserir.put(DbHelper.getClEmprestimosIdEquipFk(), teste);
+            valoresParaInserir.put(DbHelper.getClEmprestimosNomePessoa(), emp.getNomePessoa());
+            valoresParaInserir.put(DbHelper.getClEmprestimosTelefone(), emp.getTelefone());
+            valoresParaInserir.put(DbHelper.getClEmprestimosData(), emp.getData());
+            valoresParaInserir.put(DbHelper.getClEmprestimosDevolvido(), emp.isDevolvido());
+
+
             String[] argumentoWhereSQL = {emp.getId().toString()};
-            salva.delete(DbHelper.getTbEquipamentos(), "id = ?", argumentoWhereSQL);
+            salva.update(DbHelper.getTbEmprestimos(), valoresParaInserir, "id = ?", argumentoWhereSQL);
+            salva.delete(DbHelper.getTbEmprestimos(), "id = ?", argumentoWhereSQL);
             Log.i("DATA", "Equipamento apagado com sucesso");
         } catch (Exception e) {
             Log.e("ERROR", "Erro ao apagar o equipamento" + e.getMessage());
